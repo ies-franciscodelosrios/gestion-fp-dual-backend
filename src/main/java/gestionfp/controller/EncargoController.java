@@ -27,31 +27,31 @@ public class EncargoController {
 	EncargoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Encargo>> getAllNotes() {
+	public ResponseEntity<List<Encargo>> getAllEncargos() {
 		List<Encargo> result = service.getAllEncargo();
 		return new ResponseEntity<List<Encargo>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Encargo> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Encargo> getEncargoById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		Encargo result = service.getEncargoById(id);
 		return new ResponseEntity<Encargo>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Encargo> saveNote(@RequestBody Encargo encargo) throws RecordNotFoundException {
+	public ResponseEntity<Encargo> saveEncargo(@RequestBody Encargo encargo) throws RecordNotFoundException {
 		Encargo result = service.createOrUpdateEncargo(encargo);
 		return new ResponseEntity<Encargo>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Encargo> updateNote(@RequestBody Encargo encargo) throws RecordNotFoundException {
+	public ResponseEntity<Encargo> updateEncargo(@RequestBody Encargo encargo) throws RecordNotFoundException {
 		Encargo result = service.createOrUpdateEncargo(encargo);
 		return new ResponseEntity<Encargo>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Encargo> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Encargo> deleteEncargoById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByEncargo(id);
 		return new ResponseEntity<Encargo>(null , new HttpHeaders(), HttpStatus.OK);
 	}

@@ -27,31 +27,31 @@ public class ModuloController {
 	ModuloService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Modulo>> getAllNotes() {
+	public ResponseEntity<List<Modulo>> getAllModulos() {
 		List<Modulo> result = service.getAllModulo();
 		return new ResponseEntity<List<Modulo>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Modulo> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Modulo> getModuloById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		Modulo result = service.getModuloById(id);
 		return new ResponseEntity<Modulo>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Modulo> saveNote(@RequestBody Modulo modulo) throws RecordNotFoundException {
+	public ResponseEntity<Modulo> saveModulo(@RequestBody Modulo modulo) throws RecordNotFoundException {
 		Modulo result = service.createOrUpdateModulo(modulo);
 		return new ResponseEntity<Modulo>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Modulo> updateNote(@RequestBody Modulo modulo) throws RecordNotFoundException {
+	public ResponseEntity<Modulo> updateModulo(@RequestBody Modulo modulo) throws RecordNotFoundException {
 		Modulo result = service.createOrUpdateModulo(modulo);
 		return new ResponseEntity<Modulo>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Modulo> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Modulo> deleteModuloById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByModulo(id);
 		return new ResponseEntity<Modulo>(null , new HttpHeaders(), HttpStatus.OK);
 	}

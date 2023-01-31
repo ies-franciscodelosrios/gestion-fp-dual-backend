@@ -27,31 +27,31 @@ public class Periodo_PracticaController {
 	PeriodoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Periodo_Practica>> getAllNotes() {
+	public ResponseEntity<List<Periodo_Practica>> getAllPeriodos() {
 		List<Periodo_Practica> result = service.getAllPeriodos();
 		return new ResponseEntity<List<Periodo_Practica>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Periodo_Practica> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Periodo_Practica> getPeriodoById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		Periodo_Practica result = service.getPeriodoById(id);
 		return new ResponseEntity<Periodo_Practica>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Periodo_Practica> saveNote(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
+	public ResponseEntity<Periodo_Practica> savePeriodo(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
 		Periodo_Practica result = service.createOrUpdatePeriodo(periodo);
 		return new ResponseEntity<Periodo_Practica>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Periodo_Practica> updateNote(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
+	public ResponseEntity<Periodo_Practica> updatePeriodo(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
 		Periodo_Practica result = service.createOrUpdatePeriodo(periodo);
 		return new ResponseEntity<Periodo_Practica>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Periodo_Practica> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Periodo_Practica> deletePeriodoById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByPeriodo(id);
 		return new ResponseEntity<Periodo_Practica>(null , new HttpHeaders(), HttpStatus.OK);
 	}

@@ -27,31 +27,31 @@ public class UserController {
 	UserService service;
 	
 	@GetMapping
-	public ResponseEntity<List<User>> getAllNotes() {
+	public ResponseEntity<List<User>> getAllUsers() {
 		List<User> result = service.getAllUsers();
 		return new ResponseEntity<List<User>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		User result = service.getUserById(id);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<User> saveNote(@RequestBody User user) throws RecordNotFoundException {
+	public ResponseEntity<User> saveUser(@RequestBody User user) throws RecordNotFoundException {
 		User result = service.createOrUpdateUser(user);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<User> updateNote(@RequestBody User user) throws RecordNotFoundException {
+	public ResponseEntity<User> updateUser(@RequestBody User user) throws RecordNotFoundException {
 		User result = service.createOrUpdateUser(user);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<User> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<User> deleteUserById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByUser(id);
 		return new ResponseEntity<User>(null , new HttpHeaders(), HttpStatus.OK);
 	}

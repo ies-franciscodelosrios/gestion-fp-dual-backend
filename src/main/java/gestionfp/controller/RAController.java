@@ -27,31 +27,31 @@ public class RAController {
 	RAService service;
 	
 	@GetMapping
-	public ResponseEntity<List<RA>> getAllNotes() {
+	public ResponseEntity<List<RA>> getAllRAs() {
 		List<RA> result = service.getAllRA();
 		return new ResponseEntity<List<RA>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<RA> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<RA> getRAById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		RA result = service.getRAById(id);
 		return new ResponseEntity<RA>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<RA> saveNote(@RequestBody RA ra) throws RecordNotFoundException {
+	public ResponseEntity<RA> saveRA(@RequestBody RA ra) throws RecordNotFoundException {
 		RA result = service.createOrUpdateRA(ra);
 		return new ResponseEntity<RA>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<RA> updateNote(@RequestBody RA ra) throws RecordNotFoundException {
+	public ResponseEntity<RA> updateRA(@RequestBody RA ra) throws RecordNotFoundException {
 		RA result = service.createOrUpdateRA(ra);
 		return new ResponseEntity<RA>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<RA> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<RA> deleteRAById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByRA(id);
 		return new ResponseEntity<RA>(null , new HttpHeaders(), HttpStatus.OK);
 	}

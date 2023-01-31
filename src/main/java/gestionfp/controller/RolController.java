@@ -27,31 +27,31 @@ public class RolController {
 	RolService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Rol>> getAllNotes() {
+	public ResponseEntity<List<Rol>> getAllRoles() {
 		List<Rol> result = service.getAllRol();
 		return new ResponseEntity<List<Rol>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Rol> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Rol> getRolById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		Rol result = service.getRolById(id);
 		return new ResponseEntity<Rol>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Rol> saveNote(@RequestBody Rol rol) throws RecordNotFoundException {
+	public ResponseEntity<Rol> saveRol(@RequestBody Rol rol) throws RecordNotFoundException {
 		Rol result = service.createOrUpdateRol(rol);
 		return new ResponseEntity<Rol>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<Rol> updateNote(@RequestBody Rol rol) throws RecordNotFoundException {
+	public ResponseEntity<Rol> updateRol(@RequestBody Rol rol) throws RecordNotFoundException {
 		Rol result = service.createOrUpdateRol(rol);
 		return new ResponseEntity<Rol>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<Rol> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<Rol> deleteRolById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByRol(id);
 		return new ResponseEntity<Rol>(null , new HttpHeaders(), HttpStatus.OK);
 	}

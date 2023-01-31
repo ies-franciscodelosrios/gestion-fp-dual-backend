@@ -27,31 +27,31 @@ public class CEController {
 	CEService service;
 	
 	@GetMapping
-	public ResponseEntity<List<CE>> getAllNotes() {
+	public ResponseEntity<List<CE>> getAllCE() {
 		List<CE> result = service.getAllCE();
 		return new ResponseEntity<List<CE>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<CE> getNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<CE> getCEById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		CE result = service.getCEById(id);
 		return new ResponseEntity<CE>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PostMapping
-	public ResponseEntity<CE> saveNote(@RequestBody CE ce) throws RecordNotFoundException {
+	public ResponseEntity<CE> saveCE(@RequestBody CE ce) throws RecordNotFoundException {
 		CE result = service.createOrUpdateCE(ce);
 		return new ResponseEntity<CE>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@PutMapping
-	public ResponseEntity<CE> updateNote(@RequestBody CE ce) throws RecordNotFoundException {
+	public ResponseEntity<CE> updateCE(@RequestBody CE ce) throws RecordNotFoundException {
 		CE result = service.createOrUpdateCE(ce);
 		return new ResponseEntity<CE>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<CE> deleteNoteById(@PathVariable("id") Long id) throws RecordNotFoundException {
+	public ResponseEntity<CE> deleteCEById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByCE(id);
 		return new ResponseEntity<CE>(null , new HttpHeaders(), HttpStatus.OK);
 	}
