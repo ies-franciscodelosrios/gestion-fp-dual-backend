@@ -68,39 +68,25 @@ public class UserService {
 		if(user.getId()!=null) {
 			Optional<User> n = repository.findById(user.getId());
 			if(n.isPresent()) {
-				if(user.getRol().getNombre().equals("Alumno")
-						|| user.getRol().getNombre().equals("Empresa")
-						|| user.getRol().getNombre().equals("Administrador")
-						|| user.getRol().getNombre().equals("Centro Educativo")){	
-					
-					Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
-					if(rol.isPresent()) {
-						user.setRol(rol.get());
-						user = repository.save(user);
-					}
+				Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
+				if(rol.isPresent()) {
+					user.setRol(rol.get());
+					user = repository.save(user);
+				}else {
+					throw new RecordBadRequestException("Rol invalido", user.getId());
 				}
 			}else {
 				throw new RecordNotFoundException("Usuario no encontrado", user.getId());
 			}
 		}else {
-			if(user.getRol().getNombre().equals("Alumno")) {
-				if(user.isAlta()==true) {
-					Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
-					if(rol.isPresent()) {
-						user.setRol(rol.get());
-						user = repository.save(user);
-					}
-				}
-			}else if(user.getRol().getNombre().equals("Empresa")
-					|| user.getRol().getNombre().equals("Administrador")
-					|| user.getRol().getNombre().equals("Centro Educativo")) {
+			if(user.isAlta()==true) {
 				Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
 				if(rol.isPresent()) {
 					user.setRol(rol.get());
 					user = repository.save(user);
+				}else {
+					throw new RecordBadRequestException("Rol invalido", user.getId());
 				}
-			}else {
-				throw new RecordBadRequestException("Rol invalido", user.getId());
 			}
 		}
 		return user;
