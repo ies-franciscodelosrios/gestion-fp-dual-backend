@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import gestionfp.exception.RecordBadRequestException;
 import gestionfp.exception.RecordNotFoundException;
+import gestionfp.model.Rol;
 import gestionfp.model.User;
+import gestionfp.repository.RolesRepository;
 import gestionfp.repository.UsersRepository;
 
 
@@ -17,6 +19,8 @@ import gestionfp.repository.UsersRepository;
 public class UserService {
 	@Autowired
 	UsersRepository repository;
+	@Autowired
+	RolesRepository rs;
 	
 	public List<User> getAllUsers() {
 		return repository.findAll();
@@ -60,14 +64,20 @@ public class UserService {
 	}
 	
 	public User createOrUpdateUser(User user) {
+		
 		if(user.getId()!=null) {
 			Optional<User> n = repository.findById(user.getId());
 			if(n.isPresent()) {
 				if(user.getRol().getNombre().equals("Alumno")
 						|| user.getRol().getNombre().equals("Empresa")
 						|| user.getRol().getNombre().equals("Administrador")
-						|| user.getRol().getNombre().equals("Centro Educativo")){		
-					user = repository.save(user);
+						|| user.getRol().getNombre().equals("Centro Educativo")){	
+					
+					Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
+					if(rol.isPresent()) {
+						user.setRol(rol.get());
+						user = repository.save(user);
+					}
 				}
 			}else {
 				throw new RecordNotFoundException("Usuario no encontrado", user.getId());
@@ -75,12 +85,20 @@ public class UserService {
 		}else {
 			if(user.getRol().getNombre().equals("Alumno")) {
 				if(user.isAlta()==true) {
-					user = repository.save(user);
+					Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
+					if(rol.isPresent()) {
+						user.setRol(rol.get());
+						user = repository.save(user);
+					}
 				}
 			}else if(user.getRol().getNombre().equals("Empresa")
 					|| user.getRol().getNombre().equals("Administrador")
 					|| user.getRol().getNombre().equals("Centro Educativo")) {
-				user = repository.save(user);
+				Optional<Rol> rol=rs.getByName(user.getRol().getNombre());
+				if(rol.isPresent()) {
+					user.setRol(rol.get());
+					user = repository.save(user);
+				}
 			}else {
 				throw new RecordBadRequestException("Rol invalido", user.getId());
 			}
