@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="modulos")
 public class Modulo {
@@ -22,6 +24,7 @@ public class Modulo {
 	private String nombre;
 	
 	@OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private List<RA> ra;
 
 	public Modulo(Long cod_mod_boja, String nombre, List<RA> ra) {

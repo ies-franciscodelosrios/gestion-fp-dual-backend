@@ -17,6 +17,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="periodo_practicas")
 public class Periodo_Practica {
@@ -26,19 +29,20 @@ public class Periodo_Practica {
 	@Column(name = "id")
 	private Long id;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_centro", nullable = false)
 	private User id_centro;
 	
-	@OneToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_empresa", nullable = false)
 	private User id_empresa;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "id_alumno", nullable = false)
 	private User id_alumno;
 	
 	@OneToMany(mappedBy = "periodo_practica", fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private List<Encargo> encargo;
 	
 	@ManyToMany
@@ -49,9 +53,11 @@ public class Periodo_Practica {
 	private List<RA> ra;
 	
 	@Column(name = "tiempo_inicio", nullable = false)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Timestamp tiempo_inicio;
 	
 	@Column(name = "tiempo_final", nullable = false)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Timestamp tiempo_final;
 	
 	@Column(name = "estado", nullable = false)

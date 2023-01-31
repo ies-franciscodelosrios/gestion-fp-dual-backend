@@ -17,7 +17,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="users")
@@ -36,14 +36,17 @@ public class User {
 	@JsonBackReference
 	private Rol rol;
 	
-	@OneToMany(mappedBy = "id_centro", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "id_centro", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<User> id_centro;
 	
 	@OneToOne(cascade = CascadeType.ALL)
 	@PrimaryKeyJoinColumn
+	@JsonIgnore
 	private User id_empresa;
 	
-	@OneToMany(mappedBy = "id_alumno", fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "id_alumno", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private List<User> id_alumno;
 	
 	@Column(name = "alta", nullable = false)

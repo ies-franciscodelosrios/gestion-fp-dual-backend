@@ -15,6 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="ra")
 public class RA {
@@ -26,12 +29,14 @@ public class RA {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_modulo", nullable = false)
+	@JsonBackReference
 	private Modulo modulo;
 	
 	@Column(name = "resultado", length = 128, nullable = false)
 	private String resultado;
 	
 	@OneToMany(mappedBy = "ra", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JsonManagedReference
 	private List<CE> ce;
 	
 	@ManyToMany(mappedBy = "ra")

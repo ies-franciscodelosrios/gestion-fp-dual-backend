@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name="encargos")
 public class Encargo {
@@ -23,12 +26,14 @@ public class Encargo {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_periodo", nullable = false)
+	@JsonBackReference
 	private Periodo_Practica periodo_practica;
 	
 	@Column(name = "tarea", length = 128, nullable = false)
 	private String tarea;
 	
 	@Column(name = "fecha", nullable = false)
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Timestamp fecha;
 	
 	@Column(name = "estado", nullable = false)
