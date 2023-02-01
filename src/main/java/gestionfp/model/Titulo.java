@@ -9,45 +9,35 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
-@Table(name="modulos")
-public class Modulo {
+@Table(name="titulos")
+public class Titulo {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long id;
 	
-	@Column(name = "cod_mod_boja", length = 128, unique = true, nullable = false)
-	private String cod_mod_boja;
-	
 	@Column(name = "nombre", length = 128, unique = true, nullable = false)
 	private String nombre;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_titulo", nullable = false)
-	@JsonBackReference
-	private Titulo titulo;
-	
-	@OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "titulo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@JsonManagedReference
-	private List<RA> ra;
-
-	public Modulo(String cod_mod_boja, String nombre, List<RA> ra) {
-		this.cod_mod_boja = cod_mod_boja;
-		this.nombre = nombre;
-		this.ra = ra;
-	}
+	private List<Modulo> modulo;
 	
-	public Modulo() {
+	public Titulo(Long id, String nombre, List<Modulo> modulo) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.modulo = modulo;
+	}
+
+	public Titulo() {
 		super();
 	}
 
@@ -59,22 +49,6 @@ public class Modulo {
 		this.id = id;
 	}
 
-	public Titulo getTitulo() {
-		return titulo;
-	}
-
-	public void setTitulo(Titulo titulo) {
-		this.titulo = titulo;
-	}
-
-	public String getCod_mod_boja() {
-		return cod_mod_boja;
-	}
-
-	public void setCod_mod_boja(String cod_mod_boja) {
-		this.cod_mod_boja = cod_mod_boja;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
@@ -83,12 +57,12 @@ public class Modulo {
 		this.nombre = nombre;
 	}
 
-	public List<RA> getRa() {
-		return ra;
+	public List<Modulo> getModulo() {
+		return modulo;
 	}
 
-	public void setRa(List<RA> ra) {
-		this.ra = ra;
+	public void setModulo(List<Modulo> modulo) {
+		this.modulo = modulo;
 	}
 
 	@Override
@@ -107,7 +81,7 @@ public class Modulo {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Modulo other = (Modulo) obj;
+		Titulo other = (Titulo) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
