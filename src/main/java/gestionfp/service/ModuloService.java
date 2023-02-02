@@ -9,12 +9,16 @@ import org.springframework.stereotype.Service;
 import gestionfp.exception.RecordBadRequestException;
 import gestionfp.exception.RecordNotFoundException;
 import gestionfp.model.Modulo;
+import gestionfp.model.Titulo;
 import gestionfp.repository.ModulosRepository;
+import gestionfp.repository.TitulosRepository;
 
 @Service
 public class ModuloService {
 	@Autowired
 	ModulosRepository repository;
+	@Autowired
+	TitulosRepository tiRepository;
 	
 	public List<Modulo> getAllModulo() {
 		return repository.findAll();
@@ -30,21 +34,14 @@ public class ModuloService {
 	}
 	
 	public Modulo createOrUpdateModulo(Modulo modulo) {
-		if(modulo.getCod_mod_boja()!=null) {
-			boolean create=true;
-			List<Modulo> modulos = getAllModulo();
-			for(Modulo e: modulos) {
-				if(e.getNombre().equals(modulo.getNombre())) {
-					create =false;
-				}
+		if(modulo.getTitulo()!=null) {
+			Optional<Titulo> a=tiRepository.findById(modulo.getTitulo().getId());
+			if(a.isPresent()) {
+				modulo=repository.save(modulo);
 			}
-			if(create) {
-				modulo = repository.save(modulo);
-			}else {
-				throw new RecordBadRequestException("El nombre del modulo ya existe", modulo.getCod_mod_boja());
-			}
+			
 		}else {
-			modulo = repository.save(modulo);
+			throw new RecordBadRequestException("id_Ra del CE es null", modulo.getCod_mod_boja());
 		}
 		return modulo;
 	}

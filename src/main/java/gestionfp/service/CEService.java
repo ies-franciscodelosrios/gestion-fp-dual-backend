@@ -11,11 +11,14 @@ import gestionfp.exception.RecordNotFoundException;
 import gestionfp.model.CE;
 import gestionfp.model.RA;
 import gestionfp.repository.CERepository;
+import gestionfp.repository.RARepository;
 
 @Service
 public class CEService {
 	@Autowired
 	CERepository repository;
+	@Autowired
+	RARepository raRepository;
 	
 	public List<CE> getAllCE() {
 		return repository.findAll();
@@ -32,9 +35,8 @@ public class CEService {
 	
 	public CE createOrUpdateCE(CE ce) {
 		if (ce.getRa() != null) {
-			RAService ra = new RAService();
-			RA a = ra.getRAById(ce.getRa().getId());
-			if (a.getModulo() != null) {
+			Optional<RA> a = raRepository.findById(ce.getRa().getId());
+			if (a.isPresent()) {
 				ce = repository.save(ce);
 			} else {
 				throw new RecordBadRequestException("id_Ra del CE es invalido", ce.getId());

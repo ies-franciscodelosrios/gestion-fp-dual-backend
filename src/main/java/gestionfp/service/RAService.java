@@ -9,12 +9,15 @@ import gestionfp.exception.RecordBadRequestException;
 import gestionfp.exception.RecordNotFoundException;
 import gestionfp.model.Modulo;
 import gestionfp.model.RA;
+import gestionfp.repository.ModulosRepository;
 import gestionfp.repository.RARepository;
 
 @Service
 public class RAService {
 	@Autowired
 	RARepository repository;
+	@Autowired
+	ModulosRepository mdRepository;
 	
 	public List<RA> getAllRA() {
 		return repository.findAll();
@@ -31,9 +34,8 @@ public class RAService {
 	
 	public RA createOrUpdateRA(RA ra) {
 		if (ra.getModulo() != null) {
-			ModuloService ms = new ModuloService();
-			Modulo a = ms.getModuloById(ra.getModulo().getCod_mod_boja());
-			if (a.getNombre() != null) {
+			Optional<Modulo> a = mdRepository.findById(ra.getModulo().getId());
+			if (a.isPresent()) {
 				ra = repository.save(ra);
 			} else {
 				throw new RecordBadRequestException("id_Ra del CE es invalido", ra.getId());
