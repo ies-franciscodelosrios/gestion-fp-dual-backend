@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -40,6 +41,7 @@ public class RA {
 	private List<CE> ce;
 	
 	@ManyToMany(mappedBy = "ra")
+	@JsonIgnore
 	private List<Periodo_Practica> periodo_practica;
 
 	public RA(Long id, Modulo modulo, String resultado, List<CE> ce, List<Periodo_Practica> periodo_practica) {
