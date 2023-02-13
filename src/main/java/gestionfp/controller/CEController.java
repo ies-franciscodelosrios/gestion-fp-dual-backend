@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,30 +27,35 @@ public class CEController {
 	@Autowired
 	CEService service;
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public ResponseEntity<List<CE>> getAllCE() {
 		List<CE> result = service.getAllCE();
 		return new ResponseEntity<List<CE>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
 	public ResponseEntity<CE> getCEById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		CE result = service.getCEById(id);
 		return new ResponseEntity<CE>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<CE> saveCE(@RequestBody CE ce) throws RecordNotFoundException {
 		CE result = service.createOrUpdateCE(ce);
 		return new ResponseEntity<CE>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PutMapping
 	public ResponseEntity<CE> updateCE(@RequestBody CE ce) throws RecordNotFoundException {
 		CE result = service.createOrUpdateCE(ce);
 		return new ResponseEntity<CE>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<CE> deleteCEById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByCE(id);

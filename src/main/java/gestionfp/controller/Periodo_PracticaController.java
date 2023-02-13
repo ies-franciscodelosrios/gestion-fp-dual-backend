@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,30 +27,35 @@ public class Periodo_PracticaController {
 	@Autowired
 	PeriodoService service;
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public ResponseEntity<List<Periodo_Practica>> getAllPeriodos() {
 		List<Periodo_Practica> result = service.getAllPeriodos();
 		return new ResponseEntity<List<Periodo_Practica>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
 	public ResponseEntity<Periodo_Practica> getPeriodoById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		Periodo_Practica result = service.getPeriodoById(id);
 		return new ResponseEntity<Periodo_Practica>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<Periodo_Practica> savePeriodo(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
 		Periodo_Practica result = service.createOrUpdatePeriodo(periodo);
 		return new ResponseEntity<Periodo_Practica>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PutMapping
 	public ResponseEntity<Periodo_Practica> updatePeriodo(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
 		Periodo_Practica result = service.createOrUpdatePeriodo(periodo);
 		return new ResponseEntity<Periodo_Practica>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Periodo_Practica> deletePeriodoById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByPeriodo(id);

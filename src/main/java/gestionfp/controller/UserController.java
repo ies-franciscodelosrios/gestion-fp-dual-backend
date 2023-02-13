@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,30 +27,35 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping
 	public ResponseEntity<List<User>> getAllUsers() {
 		List<User> result = service.getAllUsers();
 		return new ResponseEntity<List<User>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@GetMapping("/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		User result = service.getUserById(id);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<User> saveUser(@RequestBody User user) throws RecordNotFoundException {
 		User result = service.createOrUpdateUser(user);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@PutMapping
 	public ResponseEntity<User> updateUser(@RequestBody User user) throws RecordNotFoundException {
 		User result = service.createOrUpdateUser(user);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
+	@CrossOrigin(origins = "*")
 	@DeleteMapping("/{id}")
 	public ResponseEntity<User> deleteUserById(@PathVariable("id") Long id) throws RecordNotFoundException {
 		service.deleteByUser(id);
