@@ -42,6 +42,13 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "*")
+	@GetMapping("/{email}")
+	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) throws RecordNotFoundException {
+		User result = service.getUserByEmail(email);
+		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<User> saveUser(@RequestBody User user) throws RecordNotFoundException {
 		User result = service.createOrUpdateUser(user);
