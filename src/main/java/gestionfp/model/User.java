@@ -18,6 +18,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="users")
@@ -101,6 +102,11 @@ public class User {
 
 	public void setRol(Rol rol) {
 		this.rol = rol;
+	}
+	
+	@JsonProperty
+	public Long getid_rol() {
+		return rol == null ? null : rol.getId();
 	}
 
 	public List<User> getId_centro() {
