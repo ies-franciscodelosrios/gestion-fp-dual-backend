@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="encargos")
@@ -71,6 +72,11 @@ public class Encargo {
 
 	public void setPeriodo_practica(Periodo_Practica periodo_practica) {
 		this.periodo_practica = periodo_practica;
+	}
+	
+	@JsonProperty
+	public long getid_periodo() {
+		return periodo_practica == null ? null : periodo_practica.getId();
 	}
 
 	public String getTarea() {
