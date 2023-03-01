@@ -42,7 +42,7 @@ public class UserController {
 	}
 	
 	@CrossOrigin(origins = "*")
-	@GetMapping("/{email}")
+	@GetMapping("/email/{email}")
 	public ResponseEntity<User> getUserByEmail(@PathVariable("email") String email) throws RecordNotFoundException {
 		User result = service.getUserByEmail(email);
 		return new ResponseEntity<User>(result, new HttpHeaders(), HttpStatus.OK);
