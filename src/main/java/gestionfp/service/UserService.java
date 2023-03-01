@@ -63,6 +63,17 @@ public class UserService {
 		}
 	}
 	
+	public User getUserByEmail(String correo) {
+		User log=new User();
+		List<User> n= repository.findAll();
+		for(User u:n) {
+			if(u.getCorreo().equals(correo)){
+				log=u;
+			}
+		}
+		return log;
+	}
+	
 	public User createOrUpdateUser(User user) {
 		
 		if(user.getId()!=null) {
