@@ -42,6 +42,13 @@ public class EncargoController {
 	}
 	
 	@CrossOrigin(origins = "*")
+	@GetMapping("/user/{id}")
+	public ResponseEntity<List<Encargo>> getEncargoByIdUser(@PathVariable("id") Long id) throws RecordNotFoundException {
+		List<Encargo> result = service.getEncargoByIdUser();
+		return new ResponseEntity<List<Encargo>>(result, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<Encargo> saveEncargo(@RequestBody Encargo encargo) throws RecordNotFoundException {
 		Encargo result = service.createOrUpdateEncargo(encargo);
