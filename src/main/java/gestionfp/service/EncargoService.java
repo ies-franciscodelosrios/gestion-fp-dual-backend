@@ -1,5 +1,6 @@
 package gestionfp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,5 +55,19 @@ public class EncargoService {
 		}else {
 			throw new RecordNotFoundException("Encargo no encontrado", id);
 		}
+	}
+	
+	public List<Encargo> getEncargoByIdUser(Long id) {
+		List<Encargo> all=repository.findAll();
+		List<Encargo> result= new ArrayList<Encargo>();
+		if(all!=null) {
+			for(Encargo e:all) {
+				if(e.getPeriodo_practica().getId_alumno().getId()==id) {
+					result.add(e);
+				}
+			}
+		}
+		return result;
+		
 	}
 }
