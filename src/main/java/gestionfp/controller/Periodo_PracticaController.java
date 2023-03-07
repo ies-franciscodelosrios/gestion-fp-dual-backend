@@ -42,6 +42,13 @@ public class Periodo_PracticaController {
 	}
 	
 	@CrossOrigin(origins = "*")
+	@GetMapping("/empresa/{id}")
+	public ResponseEntity<List<Periodo_Practica>> getPeriodoByIdEmpresa(@PathVariable("id") Long id) throws RecordNotFoundException {
+		List<Periodo_Practica> result = service.getPeriodoByIdEmpresa(id);
+		return new ResponseEntity<List<Periodo_Practica>>(result, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
 	@PostMapping
 	public ResponseEntity<Periodo_Practica> savePeriodo(@RequestBody Periodo_Practica periodo) throws RecordNotFoundException {
 		Periodo_Practica result = service.createOrUpdatePeriodo(periodo);
