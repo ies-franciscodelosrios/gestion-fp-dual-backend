@@ -57,12 +57,26 @@ public class EncargoService {
 		}
 	}
 	
-	public List<Encargo> getEncargoByIdUser(Long id) {
+	public List<Encargo> getEncargoByIdAlumno(Long id) {
 		List<Encargo> all=repository.findAll();
 		List<Encargo> result= new ArrayList<Encargo>();
 		if(all!=null) {
 			for(Encargo e:all) {
-				if(e.getPeriodo_practica().getId_alumno().getId()==id) {
+				if(e.getPeriodo_practica().getId_alumno().getId()==id && e.isEstado()) {
+					result.add(e);
+				}
+			}
+		}
+		return result;
+		
+	}
+	
+	public List<Encargo> getEncargoByIdEmpresa(Long id) {
+		List<Encargo> all=repository.findAll();
+		List<Encargo> result= new ArrayList<Encargo>();
+		if(all!=null) {
+			for(Encargo e:all) {
+				if(e.getPeriodo_practica().getId_empresa().getId()==id && e.isEstado()) {
 					result.add(e);
 				}
 			}

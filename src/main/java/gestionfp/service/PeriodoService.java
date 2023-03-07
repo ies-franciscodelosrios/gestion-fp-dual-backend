@@ -1,5 +1,6 @@
 package gestionfp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,4 +59,18 @@ public class PeriodoService {
 			throw new RecordNotFoundException("Periodo_Practica no encontrado", id);
 		}
 	}
+	
+	public List<Periodo_Practica> getPeriodoByIdEmpresa(Long id){
+		List <Periodo_Practica> all = repository.findAll();
+		List <Periodo_Practica> result = new ArrayList<Periodo_Practica>();
+		for(Periodo_Practica e: all) {
+			if(e.getId_empresa().getId()==id) {
+				result.add(e);
+			}
+		}
+		return result;
+		
+	}
+	
+	
 }
