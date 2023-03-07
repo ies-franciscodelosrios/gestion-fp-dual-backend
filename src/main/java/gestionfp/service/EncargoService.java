@@ -62,7 +62,7 @@ public class EncargoService {
 		List<Encargo> result= new ArrayList<Encargo>();
 		if(all!=null) {
 			for(Encargo e:all) {
-				if(e.getPeriodo_practica().getId_alumno().getId()==id && e.isEstado()) {
+				if(e.getPeriodo_practica().getId_alumno().getId()==id) {
 					result.add(e);
 				}
 			}
@@ -76,7 +76,7 @@ public class EncargoService {
 		List<Encargo> result= new ArrayList<Encargo>();
 		if(all!=null) {
 			for(Encargo e:all) {
-				if(e.getPeriodo_practica().getId_empresa().getId()==id && e.isEstado()) {
+				if(e.getPeriodo_practica().getId_empresa().getId()==id) {
 					result.add(e);
 				}
 			}
