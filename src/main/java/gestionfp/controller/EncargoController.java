@@ -42,9 +42,16 @@ public class EncargoController {
 	}
 	
 	@CrossOrigin(origins = "*")
-	@GetMapping("/user/{id}")
-	public ResponseEntity<List<Encargo>> getEncargoByIdUser(@PathVariable("id") Long id) throws RecordNotFoundException {
-		List<Encargo> result = service.getEncargoByIdUser(id);
+	@GetMapping("/alumno/{id}")
+	public ResponseEntity<List<Encargo>> getEncargoByIdAlumno(@PathVariable("id") Long id) throws RecordNotFoundException {
+		List<Encargo> result = service.getEncargoByIdAlumno(id);
+		return new ResponseEntity<List<Encargo>>(result, new HttpHeaders(), HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@GetMapping("/empresa/{id}")
+	public ResponseEntity<List<Encargo>> getEncargoByIdEmpresa(@PathVariable("id") Long id) throws RecordNotFoundException {
+		List<Encargo> result = service.getEncargoByIdEmpresa(id);
 		return new ResponseEntity<List<Encargo>>(result, new HttpHeaders(), HttpStatus.OK);
 	}
 	
