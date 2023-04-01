@@ -62,8 +62,11 @@ public class User {
 	@Column(name = "password", length = 20, nullable = true)
 	private String password;
 	
+	@Column(name = "imagen", nullable = true)
+	private String imagen;
+	
 	public User(Long id, String nombre, Rol rol, List<User> id_centro, User id_empresa, List<User> id_alumno,
-			boolean alta, String documentos, String correo, String password) {
+			boolean alta, String documentos, String correo, String password, String imagen) {
 		this.id = id;
 		this.nombre = nombre;
 		this.rol = rol;
@@ -74,6 +77,7 @@ public class User {
 		this.documentos = documentos;
 		this.correo = correo;
 		this.password = password;
+		this.imagen = imagen;
 	}
 
 	public User() {
@@ -163,6 +167,14 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	@Override
